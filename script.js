@@ -38,5 +38,5 @@ const Players = (function () {
     const getFirstPlayer = () => firstPlayer;
     const getSecondPlayer = () => secondPlayer;
 
-    return {createPlayers, getFirstPlayerName, getSecondPlayerName, getFirstPlayerToken, getSecondPlayerToken};
+    return {createPlayers, getFirstPlayer, getSecondPlayer};
 })();
