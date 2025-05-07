@@ -19,7 +19,7 @@ const gameBoard = (function () {
     return {getBoard, updateCell};
 })();
 
-const Players = (function () {
+const players = (function () {
     let firstPlayer;
     let secondPlayer;
 
@@ -39,4 +39,29 @@ const Players = (function () {
     const getSecondPlayer = () => secondPlayer;
 
     return {createPlayers, getFirstPlayer, getSecondPlayer};
+})();
+
+const gameController = (function () {
+    let round = 0;
+    let activePlayer;
+
+    function playRound (coordinateX, coordinateY) {
+        const firstPlayer = players.getFirstPlayer();
+        const secondPlayer = players.getSecondPlayer();
+        const board = gameBoard.getBoard();
+
+        if (round === 0) {
+            activePlayer = firstPlayer;
+        }
+
+        if (!board[coordinateX][coordinateY] === "") {
+            console.log("The cell is already selected");
+            return
+        }
+        board[coordinateX][coordinateY] = activePlayer.token;
+        activePlayer = (activePlayer === firstPlayer) ? secondPlayer : firstPlayer;
+        round ++;
+    }
+
+    return {playRound};
 })();
