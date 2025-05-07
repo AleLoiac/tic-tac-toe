@@ -7,4 +7,14 @@ const gameBoard = (function () {
             board[i].push("");
         }
     }
+
+    const getBoard = () => board;
+
+    const updateCell = (coordinateX, coordinateY, token) => {
+        if (board[coordinateX][coordinateY] === "") {
+            board[coordinateX][coordinateY] = token;
+        }
+    }
+
+    return {getBoard, updateCell};
 })();
