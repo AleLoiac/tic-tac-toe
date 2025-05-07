@@ -18,3 +18,27 @@ const gameBoard = (function () {
 
     return {getBoard, updateCell};
 })();
+
+const Players = (function () {
+    let firstPlayer;
+    let secondPlayer;
+
+    function createPlayers (firstPlayerName, secondPlayerName) {
+
+        firstPlayer = {
+            name: firstPlayerName,
+            token : "x",
+        };
+        secondPlayer = {
+            name: secondPlayerName,
+            token: "o",
+        };
+    }
+
+    const getFirstPlayerToken = () => firstPlayer.token;
+    const getSecondPlayerToken = () => secondPlayer.token;
+    const getFirstPlayerName = () => firstPlayer.name;
+    const getSecondPlayerName = () => secondPlayer.name;
+
+    return {createPlayers, getFirstPlayerName, getSecondPlayerName, getFirstPlayerToken, getSecondPlayerToken};
+})()
