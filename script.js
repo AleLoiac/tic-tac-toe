@@ -35,10 +35,8 @@ const Players = (function () {
         };
     }
 
-    const getFirstPlayerToken = () => firstPlayer.token;
-    const getSecondPlayerToken = () => secondPlayer.token;
-    const getFirstPlayerName = () => firstPlayer.name;
-    const getSecondPlayerName = () => secondPlayer.name;
+    const getFirstPlayer = () => firstPlayer;
+    const getSecondPlayer = () => secondPlayer;
 
     return {createPlayers, getFirstPlayerName, getSecondPlayerName, getFirstPlayerToken, getSecondPlayerToken};
-})()
+})();
