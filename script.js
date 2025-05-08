@@ -29,11 +29,11 @@ const players = (function () {
 
         firstPlayer = {
             name: firstPlayerName,
-            token : "x",
+            token : "✕",
         };
         secondPlayer = {
             name: secondPlayerName,
-            token: "o",
+            token: "⭕",
         };
     }
 
@@ -65,6 +65,7 @@ const gameController = (function () {
         gameBoard.updateCell(coordinateX, coordinateY, activePlayer.token)
         activePlayer = (activePlayer === firstPlayer) ? secondPlayer : firstPlayer;
         round ++;
+        screenController.updateScreen();
 
         if (round > 4) {
             if (checkWinners()) {
@@ -82,7 +83,7 @@ const gameController = (function () {
         // check horizontal
         for (let i = 0; i < 3; i++) {
             if (board[i].every(token => token === board[i][0]) && board[i].every(token => token !== "" )) {
-                if (board[i][0] === "x") {
+                if (board[i][0] === "✕") {
                     console.log("Player 1 wins")
                 } else {
                     console.log("Player 2 wins")
@@ -97,7 +98,7 @@ const gameController = (function () {
             const column = board.map(row => row[i]);
 
             if (column.every(token => token === column[0]) && column.every(token => token !== "" )) {
-                if (column[0] === "x") {
+                if (column[0] === "✕") {
                     console.log("Player 1 wins")
                 } else {
                     console.log("Player 2 wins")
@@ -114,7 +115,7 @@ const gameController = (function () {
 
         for (const diagonal of diagonals) {
             if (diagonal.every(token => token === diagonal[0]) && diagonal.every(token => token !== "" )) {
-                if (diagonal[0] === "x") {
+                if (diagonal[0] === "✕") {
                     console.log("Player 1 wins")
                 } else {
                     console.log("Player 2 wins")
@@ -127,4 +128,24 @@ const gameController = (function () {
     }
 
     return {playRound};
+})();
+
+const screenController = (function () {
+    const container = document.querySelector(".container");
+
+    function updateScreen() {
+        container.innerHTML = "";
+        const board = gameBoard.getBoardCopy();
+    
+        board.forEach(row => {
+            row.forEach((entry) => {
+                const cell = document.createElement("div");
+                cell.classList.add("cell");
+                cell.textContent = entry;
+                container.appendChild(cell);
+            })
+        })
+    }
+
+    return {updateScreen};
 })();
