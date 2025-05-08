@@ -47,9 +47,10 @@ const gameController = (function () {
     let round = 0;
     let activePlayer;
     let winner;
+    let tie;
 
     function playRound (coordinateX, coordinateY) {
-        if (winner) {
+        if (winner || tie) {
             console.log("The game is already finished");
             return
         }
@@ -69,6 +70,10 @@ const gameController = (function () {
             if (checkWinners()) {
                 winner = true;
             }
+        }
+        if (round >= 9 && !winner) {
+            tie = true;
+            console.log("It's a tie!")
         }
     }
 
