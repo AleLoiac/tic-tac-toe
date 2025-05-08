@@ -8,15 +8,17 @@ const gameBoard = (function () {
         }
     }
 
-    const getBoard = () => board;
+    const getBoardCopy = () => board.slice();
 
     const updateCell = (coordinateX, coordinateY, token) => {
-        if (board[coordinateX][coordinateY] === "") {
-            board[coordinateX][coordinateY] = token;
+        if (!board[coordinateX][coordinateY] === "") {
+            console.log("The cell is already selected")
+            return
         }
+        board[coordinateX][coordinateY] = token;
     }
 
-    return {getBoard, updateCell};
+    return {getBoardCopy, updateCell};
 })();
 
 const players = (function () {
@@ -54,17 +56,12 @@ const gameController = (function () {
 
         const firstPlayer = players.getFirstPlayer();
         const secondPlayer = players.getSecondPlayer();
-        const board = gameBoard.getBoard();
 
         if (round === 0) {
             activePlayer = firstPlayer;
         }
 
-        if (!board[coordinateX][coordinateY] === "") {
-            console.log("The cell is already selected");
-            return
-        }
-        board[coordinateX][coordinateY] = activePlayer.token;
+        gameBoard.updateCell(coordinateX, coordinateY, activePlayer.token)
         activePlayer = (activePlayer === firstPlayer) ? secondPlayer : firstPlayer;
         round ++;
 
@@ -76,7 +73,7 @@ const gameController = (function () {
     }
 
     function checkWinners () {
-        const board = gameBoard.getBoard();
+        const board = gameBoard.getBoardCopy();
         // check horizontal
         for (let i = 0; i < 3; i++) {
             if (board[i].every(token => token === board[i][0]) && board[i].every(token => token !== "" )) {
