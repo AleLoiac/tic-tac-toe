@@ -8,10 +8,10 @@ const gameBoard = (function () {
         }
     }
 
-    const getBoardCopy = () => board.slice();
+    const getBoardCopy = () => board.map(row => [...row]);
 
     const updateCell = (coordinateX, coordinateY, token) => {
-        if (!board[coordinateX][coordinateY] === "") {
+        if (board[coordinateX][coordinateY] !== "") {
             console.log("The cell is already selected")
             return
         }
@@ -51,7 +51,7 @@ const gameController = (function () {
 
     function playRound (coordinateX, coordinateY) {
         if (winner || tie) {
-            console.log("The game is already finished");
+            console.log("No more moves, the game is already finished");
             return
         }
 
@@ -66,7 +66,7 @@ const gameController = (function () {
         activePlayer = (activePlayer === firstPlayer) ? secondPlayer : firstPlayer;
         round ++;
 
-        if (round > 3) {
+        if (round > 4) {
             if (checkWinners()) {
                 winner = true;
             }
