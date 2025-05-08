@@ -33,7 +33,7 @@ const players = (function () {
         };
         secondPlayer = {
             name: secondPlayerName,
-            token: "⭕",
+            token: "O",
         };
     }
 
@@ -137,15 +137,27 @@ const screenController = (function () {
         container.innerHTML = "";
         const board = gameBoard.getBoardCopy();
     
-        board.forEach(row => {
-            row.forEach((entry) => {
+        board.forEach((row, i) => {
+            row.forEach((entry, j) => {
                 const cell = document.createElement("div");
                 cell.classList.add("cell");
+                cell.setAttribute("data-x", i);
+                cell.setAttribute("data-y", j);
                 cell.textContent = entry;
                 container.appendChild(cell);
             })
         })
     }
 
+    container.addEventListener("click", (e) => {
+        if (e.target.classList.value === "cell") {
+            const coordinateX = e.target.dataset.x;
+            const coordinateY = e.target.dataset.y;
+            gameController.playRound(coordinateX, coordinateY);
+        }
+    })
+
     return {updateScreen};
 })();
+
+screenController.updateScreen();
