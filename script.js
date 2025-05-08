@@ -69,7 +69,6 @@ const gameController = (function () {
             return;
         }
 
-        activePlayer = (activePlayer === firstPlayer) ? secondPlayer : firstPlayer;
         round ++;
         screenController.updateScreen();
 
@@ -82,6 +81,8 @@ const gameController = (function () {
             tie = true;
             console.log("It's a tie!")
         }
+
+        activePlayer = (activePlayer === firstPlayer) ? secondPlayer : firstPlayer;
     }
 
     function checkWinners () {
@@ -89,11 +90,8 @@ const gameController = (function () {
         // check horizontal
         for (let i = 0; i < 3; i++) {
             if (board[i].every(token => token === board[i][0]) && board[i].every(token => token !== "" )) {
-                if (board[i][0] === "✕") {
-                    console.log("Player 1 wins")
-                } else {
-                    console.log("Player 2 wins")
-                }
+                const resultDiv = document.querySelector(".result > p");
+                resultDiv.textContent = `${activePlayer.name} wins the game!`;
                 console.log("Winning row: ")
                 console.log(board[i]);
                 return true
@@ -104,11 +102,8 @@ const gameController = (function () {
             const column = board.map(row => row[i]);
 
             if (column.every(token => token === column[0]) && column.every(token => token !== "" )) {
-                if (column[0] === "✕") {
-                    console.log("Player 1 wins")
-                } else {
-                    console.log("Player 2 wins")
-                }
+                const resultDiv = document.querySelector(".result > p");
+                resultDiv.textContent = `${activePlayer.name} wins the game!`;
                 console.log("Winning column: ")
                 console.log(column);
                 return true
@@ -121,11 +116,8 @@ const gameController = (function () {
 
         for (const diagonal of diagonals) {
             if (diagonal.every(token => token === diagonal[0]) && diagonal.every(token => token !== "" )) {
-                if (diagonal[0] === "✕") {
-                    console.log("Player 1 wins")
-                } else {
-                    console.log("Player 2 wins")
-                }
+                const resultDiv = document.querySelector(".result > p");
+                resultDiv.textContent = `${activePlayer.name} wins the game!`;
                 console.log("Winning diagonal: ")
                 console.log(diagonal);
                 return true
