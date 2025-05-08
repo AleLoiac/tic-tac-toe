@@ -44,8 +44,14 @@ const players = (function () {
 const gameController = (function () {
     let round = 0;
     let activePlayer;
+    let winner;
 
     function playRound (coordinateX, coordinateY) {
+        if (winner) {
+            console.log("The game is already finished");
+            return
+        }
+
         const firstPlayer = players.getFirstPlayer();
         const secondPlayer = players.getSecondPlayer();
         const board = gameBoard.getBoard();
@@ -61,6 +67,61 @@ const gameController = (function () {
         board[coordinateX][coordinateY] = activePlayer.token;
         activePlayer = (activePlayer === firstPlayer) ? secondPlayer : firstPlayer;
         round ++;
+
+        if (round > 3) {
+            if (checkWinners()) {
+                winner = true;
+            }
+        }
+    }
+
+    function checkWinners () {
+        const board = gameBoard.getBoard();
+        // check horizontal
+        for (let i = 0; i < 3; i++) {
+            if (board[i].every(token => token === board[i][0]) && board[i].every(token => token !== "" )) {
+                if (board[i][0] === "x") {
+                    console.log("Player 1 wins")
+                } else {
+                    console.log("Player 2 wins")
+                }
+                console.log("Winning row: ")
+                console.log(board[i]);
+                return true
+            }
+        }
+        // check vertical
+        for (let i = 0; i < 3; i++) {
+            const column = board.map(row => row[i]);
+
+            if (column.every(token => token === column[0]) && column.every(token => token !== "" )) {
+                if (column[0] === "x") {
+                    console.log("Player 1 wins")
+                } else {
+                    console.log("Player 2 wins")
+                }
+                console.log("Winning column: ")
+                console.log(column);
+                return true
+            }
+        }
+        // check diagonal
+        const diagonalOne = [board[0][0],board[1][1],board[2][2]];
+        const diagonalTwo = [board[0][2],board[1][1],board[2][0]];
+        const diagonals = [diagonalOne, diagonalTwo];
+
+        for (const diagonal of diagonals) {
+            if (diagonal.every(token => token === diagonal[0]) && diagonal.every(token => token !== "" )) {
+                if (diagonal[0] === "x") {
+                    console.log("Player 1 wins")
+                } else {
+                    console.log("Player 2 wins")
+                }
+                console.log("Winning diagonal: ")
+                console.log(diagonal);
+                return true
+            }
+        }
     }
 
     return {playRound};
