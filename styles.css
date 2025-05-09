@@ -74,7 +74,8 @@ h1 {
     box-shadow: inset 0px 0px 8px 4px var(--color1);
 }
 
-.create-players-btn {
+.create-players-btn,
+.reset-btn {
     display: block;
     margin: 20px auto 40px;
     padding: 8px 30px;
@@ -84,11 +85,17 @@ h1 {
     color: var(--color1);
 }
 
-.create-players-btn:hover {
+div > .reset-btn {
+    margin: 0 auto;
+}
+
+.create-players-btn:hover,
+.reset-btn:hover {
     cursor: pointer;
 }
 
-.create-players-btn:active {
+.create-players-btn:active,
+.reset-btn:active {
     box-shadow: inset -2px 2px 2px 1px var(--color2);
 }
 
@@ -111,4 +118,8 @@ input:focus {
     font-weight: 900;
     font-size: 1.5rem;
     color: var(--color5);
+}
+
+.result {
+    height: 52px;
 }
