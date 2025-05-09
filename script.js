@@ -156,7 +156,7 @@ const screenController = (function () {
     const firstPlayer = document.querySelector("#first-player-name");
     const secondPlayer = document.querySelector("#second-player-name");
 
-    addPlayersBtn.addEventListener("click", (e) => {
+    addPlayersBtn.addEventListener("click", () => {
         const firstName = firstPlayer.value;
         const secondName = secondPlayer.value;
         players.createPlayers(firstName, secondName);
