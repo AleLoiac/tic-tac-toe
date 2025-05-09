@@ -177,9 +177,7 @@ const screenController = (function () {
         }
     })
 
-    resetBtn.addEventListener("click", (e) => {
-        gameController.resetRound();
-    })
+    resetBtn.addEventListener("click", gameController.resetRound);
 
     return {updateScreen};
 })();
