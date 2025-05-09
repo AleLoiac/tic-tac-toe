@@ -102,7 +102,7 @@ input {
 
 input:focus {
     box-shadow: inset 2px 2px 2px var(--color3);
-    border: 2px solid var(--color4);
+    border: 2px solid var(--color3);
     outline: none;
 }
 
