@@ -152,6 +152,16 @@ const gameController = (function () {
 const screenController = (function () {
     const container = document.querySelector(".container");
     const resetBtn = document.querySelector(".reset-btn");
+    const addPlayersBtn = document.querySelector(".create-players-btn");
+    const firstPlayer = document.querySelector("#first-player-name");
+    const secondPlayer = document.querySelector("#second-player-name");
+
+    addPlayersBtn.addEventListener("click", (e) => {
+        const firstName = firstPlayer.value;
+        const secondName = secondPlayer.value;
+        players.createPlayers(firstName, secondName);
+        console.log(players.getFirstPlayer(), players.getSecondPlayer());
+    })
 
     function updateScreen() {
         container.innerHTML = "";
