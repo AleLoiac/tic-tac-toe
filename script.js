@@ -19,7 +19,16 @@ const gameBoard = (function () {
         return true;
     }
 
-    return {getBoardCopy, updateCell};
+    const resetBoard = () => {
+        for (let i = 0; i < 3; i++) {
+            board[i] = [];
+            for (let j = 0; j < 3; j++) {
+                board[i].push("");
+            }
+        }
+    }
+
+    return {getBoardCopy, updateCell, resetBoard};
 })();
 
 const players = (function () {
@@ -49,6 +58,15 @@ const gameController = (function () {
     let activePlayer;
     let winner;
     let tie;
+
+    function resetRound () {
+        round = 0;
+        activePlayer = undefined;
+        winner = undefined;
+        tie = undefined;
+        gameBoard.resetBoard();
+        screenController.updateScreen();
+    }
 
     function playRound (coordinateX, coordinateY) {
         if (winner || tie) {
@@ -125,7 +143,7 @@ const gameController = (function () {
         }
     }
 
-    return {playRound};
+    return {playRound, resetRound};
 })();
 
 const screenController = (function () {
