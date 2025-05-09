@@ -97,7 +97,8 @@ const gameController = (function () {
         }
         if (round >= 9 && !winner) {
             tie = true;
-            console.log("It's a tie!")
+            const resultDiv = document.querySelector(".result > p");
+            resultDiv.textContent = `It's a tie!`;
         }
 
         activePlayer = (activePlayer === firstPlayer) ? secondPlayer : firstPlayer;
