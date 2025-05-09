@@ -65,6 +65,15 @@ h1 {
     font-size: 60px;
 }
 
+.cell:hover {
+    cursor: pointer;
+    background-color: var(--color2);
+}
+
+.cell:active {
+    box-shadow: inset 0px 0px 8px 4px var(--color1);
+}
+
 .create-players-btn {
     display: block;
     margin: 20px auto 40px;
