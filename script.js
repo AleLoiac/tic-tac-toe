@@ -66,6 +66,8 @@ const gameController = (function () {
         tie = undefined;
         gameBoard.resetBoard();
         screenController.updateScreen();
+        const resultDiv = document.querySelector(".result > p");
+        resultDiv.textContent = "";
     }
 
     function playRound (coordinateX, coordinateY) {
@@ -149,6 +151,7 @@ const gameController = (function () {
 
 const screenController = (function () {
     const container = document.querySelector(".container");
+    const resetBtn = document.querySelector(".reset-btn");
 
     function updateScreen() {
         container.innerHTML = "";
@@ -172,6 +175,10 @@ const screenController = (function () {
             const coordinateY = e.target.dataset.y;
             gameController.playRound(coordinateX, coordinateY);
         }
+    })
+
+    resetBtn.addEventListener("click", (e) => {
+        gameController.resetRound();
     })
 
     return {updateScreen};
